@@ -27,6 +27,7 @@ class FormHeroMaster {
      */
     protected function buildForm() {
         $i = 0;
+        $this->form .= "<form>";
         while($i < count($this->formElements)) {
             switch ($this->formElements[$i]['element']) {
                 case 'input':
@@ -46,6 +47,7 @@ class FormHeroMaster {
             }
             $i++;
         }
+         $this->form .= "</form>";
     }
 
     //TODO add possibility of passing obj

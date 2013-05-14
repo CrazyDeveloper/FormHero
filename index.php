@@ -40,3 +40,4 @@ $elements = array(
     );
 $form = new FormHeroMaster($elements);
 $form->makeForm();
+
