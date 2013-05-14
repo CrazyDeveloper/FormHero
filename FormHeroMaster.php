@@ -76,8 +76,22 @@ class FormHeroMaster {
 
         return "Error";
     }
-    public function createSelectElement() {
-        //TODO create loop for evry element passed to the
+    public function createSelectElement(   $element = NULL  ) {
+        $tempElement = "<select>";
+        $optionTemplateOne = '<option value="';
+        $optionTemplateTwo = '">';
+
+
+        $options = $element['options'];
+
+        if ( !empty( $options ) ) {
+
+            foreach ($options as $key => $value) {
+                $tempElement .= $optionTemplateOne.$key.$optionTemplateTwo.$value."</option>";
+            }
+            $tempElement .= "</select>";
+        }
+       $this->form .= $tempElement;
     }
 
     public function makeForm() {
