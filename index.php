@@ -6,8 +6,18 @@ $elements = array(
             array(
                 'element' => 'input',
                 'type'    => 'text',
-                'id'      => 'nekiId',
-                'class'   => 'nekaKlasa'
+                'id'      => 'userName'
+                ),
+            //Creation of radio button element
+            array(
+                'element' => 'input',
+                'type'    => 'radio',
+                'id'      => 'userName'
+                ),
+            array(
+                'element' => 'input',
+                'type'    => 'password',
+                'id'      => 'password'
                 ),
             //Creation of select element
             array(
@@ -21,7 +31,12 @@ $elements = array(
                         'value2' => 'Mercedes',
                         'value3' => 'Yugo'
                     )
-            )
+            ),
+
+            //Create submit button
+            array(
+                'element' => 'submit'
+                )
     );
 $form = new FormHeroMaster($elements);
 $form->makeForm();

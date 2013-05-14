@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by Marko Kovacevic
- * Date: 4/13/13
  * Time: 4:09 PM
  * Base class that is wrapper for form elements creation
  */
@@ -15,20 +14,18 @@ class FormHeroMaster {
     //String to be echoed once parising of form is complit
     public $form;
 
-    public function __construct ($formElements = array())
-    {
+    public function __construct ( $formElements = array() ) {
         $this->formElements = $formElements;
     }
 
 
     /*
-     * Loops tru passed elements in array or obj
+     * Loops tru passed elements in array
      * hits switch statement and calls method for building element
      * @param Array() $formElements
      * @return string
      */
-    protected function buildForm()
-    {
+    protected function buildForm() {
         $i = 0;
         while($i < count($this->formElements)) {
             switch ($this->formElements[$i]['element']) {
@@ -38,6 +35,12 @@ class FormHeroMaster {
                 case 'select':
                     $this->createSelectElement($this->formElements[$i]);
                     break;
+                    case 'submit':
+                        $this->createSubmitButton($this->formElements[$i]);
+                        break;
+                    case 'button':
+                        # code...
+                        break;
                 default:
                     echo "Error passing parametars";
             }
@@ -47,8 +50,7 @@ class FormHeroMaster {
 
     //TODO add possibility of passing obj
     //TODO wrap everything in try catch
-    public function createInputField($element = array())
-    {
+    public function createInputField( $element = array() ) {
         $tempElement = NULL;
         if ( (is_array($element)) )
         {
@@ -71,12 +73,13 @@ class FormHeroMaster {
             }
             //return $tempElement;
             $tempElement.='/>';
+            if ( (  $element['type'] === "radio" ) && (isset($element['text'])) ) $tempElement .= $element['text'];
             $this->form .= $tempElement;
         }
 
-        return "Error";
+        return false;
     }
-    public function createSelectElement(   $element = NULL  ) {
+    public function createSelectElement( $element = NULL ) {
         $tempElement = "<select>";
         $optionTemplateOne = '<option value="';
         $optionTemplateTwo = '">';
@@ -93,9 +96,35 @@ class FormHeroMaster {
         }
        $this->form .= $tempElement;
     }
+    public function createSubmitButton ( $element = NULL ) {
 
+        $tempElement = NULL;
+        if ( (is_array($element)) )
+        {
+            if (!isset($element['type'])) {
+                $tempElement .= '<input type="submit"';
+            }else{
+                $tempElement .= "<input type='".$element["type"]."'";
+            }
+            if (isset($element['id'])) {
+               $tempElement.= "id='".$element['id']."'";
+            }
+            if (isset($element['class'])) {
+                $tempElement.= "class='".$element['class']."'";
+            }
+            if (isset($element['value'])) {
+                $tempElement.= "value='".$element['value']."'";
+            }
+           
+            //return $tempElement;
+            $tempElement.='/>';
+            $this->form .= $tempElement;
+        }
+
+        return false;
+
+    }
     public function makeForm() {
-
         $this->buildForm();
         echo $this->form;
     }
