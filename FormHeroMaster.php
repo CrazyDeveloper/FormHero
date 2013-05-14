@@ -11,13 +11,12 @@ class FormHeroMaster {
 
     //Passed tru construct
     protected $formElements;
-    //String to be echoed once parising of form is complit
+    //String to be echoed once parising of form is complited
     public $form;
 
     public function __construct ( $formElements = array() ) {
         $this->formElements = $formElements;
     }
-
 
     /*
      * Loops tru passed elements in array
